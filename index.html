@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Гант-планировщик</title>
+<meta name="description" content="Планирование проекта по диаграмме Ганта: команды, оценки, зависимости. Frontend-only.">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<header class="topbar">
+  <div class="brand">📊 Гант-планировщик</div>
+  <div class="project-bar">
+    <select id="projectSelect" title="Проект"></select>
+    <button id="newProjectBtn" class="icon" title="Новый проект">＋</button>
+    <button id="renameProjectBtn" class="icon" title="Переименовать">✎</button>
+    <button id="deleteProjectBtn" class="icon danger" title="Удалить проект">🗑</button>
+  </div>
+  <span class="spacer"></span>
+  <label class="field">Старт
+    <input type="date" id="startDate">
+  </label>
+  <label class="chk" title="Исключить субботу и воскресенье из графика работ">
+    <input type="checkbox" id="skipWeekends"> выходные
+  </label>
+  <button id="exportBtn" class="btn">⬇ Экспорт</button>
+  <button id="importBtn" class="btn">⬆ Импорт</button>
+  <input type="file" id="importFile" accept="application/json,.json" hidden>
+</header>
+
+<main>
+  <aside class="sidebar">
+    <section class="panel">
+      <h2>Команды <button id="addTeamBtn" class="mini" title="Добавить команду">＋</button></h2>
+      <ul id="teamList" class="list"></ul>
+      <p class="hint" id="teamHint">Единиц работы в день.</p>
+    </section>
+    <section class="panel grow">
+      <h2>Задачи <button id="addTaskBtn" class="mini" title="Добавить задачу">＋</button></h2>
+      <ul id="taskList" class="list"></ul>
+    </section>
+  </aside>
+
+  <section class="content">
+    <div id="errors" class="errors" hidden></div>
+    <div class="summary" id="summary"></div>
+    <div id="ganttWrap" class="gantt-wrap"></div>
+    <div id="legend" class="legend"></div>
+  </section>
+</main>
+
+<dialog id="taskDialog">
+  <form id="taskForm">
+    <h3 id="taskDialogTitle">Задача</h3>
+    <div class="grid2">
+      <label>Название
+        <input id="taskTitle" required maxlength="200">
+      </label>
+      <label>Команда
+        <select id="taskTeam" required></select>
+      </label>
+      <label>Оценка (единиц работы)
+        <input id="taskEstimate" type="number" min="0" step="1" value="8">
+      </label>
+      <label>Мин. дата старта
+        <input id="taskMinStart" type="date">
+      </label>
+    </div>
+    <label>Описание
+      <textarea id="taskDescription" rows="2" maxlength="1000"></textarea>
+    </label>
+    <fieldset class="deps-fieldset">
+      <legend>Зависит от задач</legend>
+      <div id="taskDeps" class="deps"></div>
+    </fieldset>
+    <menu>
+      <button type="button" id="taskDelete" class="danger">Удалить</button>
+      <span class="spacer"></span>
+      <button type="button" id="taskCancel">Отмена</button>
+      <button type="button" id="taskSave" class="primary">Сохранить</button>
+    </menu>
+  </form>
+</dialog>
+
+<dialog id="teamDialog">
+  <form id="teamForm">
+    <h3 id="teamDialogTitle">Команда</h3>
+    <label>Название
+      <input id="teamName" required maxlength="100">
+    </label>
+    <label>Ёмкость (единиц работы в день)
+      <input id="teamCapacity" type="number" min="1" step="1" value="1">
+    </label>
+    <menu>
+      <button type="button" id="teamDelete" class="danger">Удалить</button>
+      <span class="spacer"></span>
+      <button type="button" id="teamCancel">Отмена</button>
+      <button type="button" id="teamSave" class="primary">Сохранить</button>
+    </menu>
+  </form>
+</dialog>
+
+<script src="js/scheduler.js"></script>
+<script src="js/store.js"></script>
+<script src="js/gantt.js"></script>
+<script src="js/ui.js"></script>
+<script src="js/main.js"></script>
+</body>
+</html>

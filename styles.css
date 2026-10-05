@@ -1,0 +1,93 @@
+:root{
+  --bg:#0f1420; --bg2:#161d2c; --bg3:#1e2739; --line:#2c374d;
+  --fg:#e7ecf5; --muted:#93a1bb; --accent:#4c8dff; --accent2:#7c5cff;
+  --ok:#2fbf71; --warn:#ffb020; --danger:#ff5c6c; --bar:#4c8dff;
+  --radius:10px; --shadow:0 8px 28px rgba(0,0,0,.35);
+}
+*{box-sizing:border-box}
+html,body{height:100%}
+body{
+  margin:0; background:linear-gradient(180deg,#0d1220,#0f1420 40%);
+  color:var(--fg); font:14px/1.45 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Ubuntu,sans-serif;
+  display:flex; flex-direction:column; overflow:hidden;
+}
+h2{font-size:12px; letter-spacing:.06em; text-transform:uppercase; color:var(--muted); margin:0 0 8px; display:flex; align-items:center; gap:6px}
+h3{font-size:16px; margin:0 0 14px}
+.spacer{flex:1}
+.hint{color:var(--muted); font-size:11px; margin:8px 0 0}
+
+/* Topbar */
+.topbar{display:flex; align-items:center; gap:10px; padding:10px 14px; background:var(--bg2); border-bottom:1px solid var(--line); flex-wrap:wrap}
+.brand{font-weight:700; letter-spacing:.02em; white-space:nowrap}
+.project-bar{display:flex; align-items:center; gap:4px}
+.project-bar select{min-width:180px}
+.field{display:flex; align-items:center; gap:6px; color:var(--muted); font-size:12px}
+input,select,textarea,button{font:inherit; color:var(--fg)}
+input,select,textarea{
+  background:var(--bg3); border:1px solid var(--line); border-radius:8px;
+  padding:6px 8px; outline:none;
+}
+input:focus,select:focus,textarea:focus{border-color:var(--accent)}
+textarea{resize:vertical; width:100%}
+.chk{display:flex; align-items:center; gap:6px; color:var(--muted); font-size:12px; user-select:none}
+button{
+  background:var(--bg3); border:1px solid var(--line); border-radius:8px;
+  padding:6px 10px; cursor:pointer; transition:.15s background,.15s border-color;
+}
+button:hover{background:#26324a; border-color:#3d4c69}
+button.primary{background:var(--accent); border-color:var(--accent); color:#08122a; font-weight:600}
+button.primary:hover{background:#5f9bff}
+button.danger{color:var(--danger)}
+button.danger:hover{background:#3a1d26; border-color:#5c2b36}
+button.mini{padding:2px 8px; font-size:13px; line-height:1.1}
+button.icon{padding:5px 9px}
+
+/* Layout */
+main{flex:1; display:flex; min-height:0}
+.sidebar{width:300px; min-width:260px; background:var(--bg2); border-right:1px solid var(--line); display:flex; flex-direction:column; min-height:0}
+.panel{padding:12px; border-bottom:1px solid var(--line); display:flex; flex-direction:column; min-height:0}
+.panel.grow{flex:1; overflow:auto}
+.list{list-style:none; margin:0; padding:0}
+.list li{display:flex; align-items:center; gap:8px; padding:7px 8px; border-radius:8px; cursor:pointer; border:1px solid transparent}
+.list li:hover{background:var(--bg3)}
+.list li.sel{background:#22304d; border-color:#3a4c72}
+.list .name{flex:1; min-width:0; overflow:hidden; text-overflow:ellipsis; white-space:nowrap}
+.list .meta{color:var(--muted); font-size:11px; white-space:nowrap}
+.dot{width:10px; height:10px; border-radius:3px; flex:0 0 auto}
+.empty{color:var(--muted); font-size:12px; padding:8px}
+
+.content{flex:1; min-width:0; display:flex; flex-direction:column; min-height:0; padding:12px; gap:10px}
+.summary{display:flex; gap:18px; flex-wrap:wrap; color:var(--muted); font-size:12px}
+.summary b{color:var(--fg)}
+.gantt-wrap{flex:1; min-height:0; overflow:auto; background:var(--bg2); border:1px solid var(--line); border-radius:var(--radius)}
+.legend{display:flex; gap:14px; flex-wrap:wrap; color:var(--muted); font-size:12px}
+.legend .item{display:flex; align-items:center; gap:6px}
+.errors{background:#3a1d26; border:1px solid #6b2d3a; color:#ffc3cc; padding:8px 12px; border-radius:8px; white-space:pre-line}
+
+/* Gantt svg */
+svg.gantt{display:block; font-family:inherit}
+.gantt .grid{stroke:#232d42}
+.gantt .grid.weekend{fill:#141a28}
+.gantt .rowline{stroke:#1d2637}
+.gantt .axis-text{fill:var(--muted); font-size:10px}
+.gantt .label{fill:var(--fg); font-size:12px}
+.gantt .label-sub{fill:var(--muted); font-size:10px}
+.gantt .bar{cursor:pointer; transition:filter .15s}
+.gantt .bar:hover{filter:brightness(1.2)}
+.gantt .bar-text{fill:#08122a; font-size:10px; font-weight:600; pointer-events:none}
+.gantt .dep{fill:none; stroke:#5b6b8c; stroke-width:1.2; marker-end:url(#arrow)}
+.gantt .today{stroke:var(--warn); stroke-width:1.2; stroke-dasharray:4 3}
+
+/* Dialogs */
+dialog{border:1px solid var(--line); background:var(--bg2); color:var(--fg); border-radius:14px; box-shadow:var(--shadow); padding:0; width:min(560px,92vw)}
+dialog::backdrop{background:rgba(4,7,14,.6)}
+dialog form{padding:18px; display:flex; flex-direction:column; gap:12px}
+dialog label{display:flex; flex-direction:column; gap:5px; font-size:12px; color:var(--muted)}
+dialog label input,dialog label select,dialog label textarea{color:var(--fg)}
+.grid2{display:grid; grid-template-columns:1fr 1fr; gap:12px}
+menu{display:flex; gap:8px; margin:4px 0 0; padding:0}
+.deps-fieldset{border:1px solid var(--line); border-radius:10px; padding:8px 10px; margin:0}
+.deps-fieldset legend{color:var(--muted); font-size:12px; padding:0 6px}
+.deps{max-height:170px; overflow:auto; display:flex; flex-direction:column; gap:4px}
+.deps label{flex-direction:row; align-items:center; gap:8px; color:var(--fg); font-size:13px; cursor:pointer}
+.deps .depteam{color:var(--muted); font-size:11px}
