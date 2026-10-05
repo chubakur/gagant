@@ -234,6 +234,7 @@
 
     var maxEnd = 0;
     tasks.forEach(function (t) { maxEnd = Math.max(maxEnd, endIdx[t.id]); });
+    if (tasks.length && maxEnd === 0) maxEnd = 1;
     var days = [];
     for (var i = 0; i < maxEnd; i++) days.push(cal.at(i));
 

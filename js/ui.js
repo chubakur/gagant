@@ -333,9 +333,14 @@
       this.value = '';
     });
 
-    // клавиатура: Enter в формах
+    // формы: не перезагружать страницу, Enter = сохранить
+    $('teamForm').addEventListener('submit', function (ev) { ev.preventDefault(); });
+    $('taskForm').addEventListener('submit', function (ev) { ev.preventDefault(); });
     $('teamForm').addEventListener('keydown', function (ev) {
       if (ev.key === 'Enter') { ev.preventDefault(); saveTeam(); }
+    });
+    $('taskForm').addEventListener('keydown', function (ev) {
+      if (ev.key === 'Enter' && ev.target && ev.target.tagName !== 'TEXTAREA') { ev.preventDefault(); saveTask(); }
     });
 
     S.onChange(rerender);
